@@ -6,7 +6,7 @@ import os
 
 def new_file():
     global file
-    root.title("Untitled Notepad")
+    notepad.title("Untitled Notepad")
     file = None
     text.delete(1.0, END)
 
@@ -14,25 +14,26 @@ def new_file():
 def open_file():
     global file
     file = askopenfilename(defaultextension=".txt"
-                        , filetypes=[("All Files", "*.*"),
-                        ("Text Documents", "*.txt")])
+                           , filetypes=[("All Files", "*.*"),
+                                        ("Text Documents", "*.txt")])
     if file == "None":
         file = None
     else:
         notepad.title(os.path.basename(file) + " - notepad")
-        text.delete(1.0,END)
+        text.delete(1.0, END)
         f = open(file, "r")
         text.insert(1.0, f.read())
         f.close()
 
+
 def save_file():
     global file
-    if file==None:
-        file = asksaveasfilename(initialfile= "Untitled.txt",
-            defaultextension=".txt",filetypes=[("All Files", "*.*"),
-                        ("Text Documents", "*.txt")])
-        if file =="":
-            file==None
+    if file == None:
+        file = asksaveasfilename(initialfile="Untitled.txt",
+                                 defaultextension=".txt", filetypes=[("All Files", "*.*"),
+                                                                     ("Text Documents", "*.txt")])
+        if file == "":
+            file == None
         else:
             f = open(file, "w")
             f.write(text.get(1.0, END))
@@ -43,20 +44,21 @@ def save_file():
         f.write(text.get(1.0, END))
         f.close()
 
+
 def exit_file():
-    root.destroy()
+    notepad.destroy()
 
 
 def cut_():
-    text.event_generate(("<<Cut>>"))
+    text.event_generate("<<Cut>>")
 
 
 def copy_():
-    text.event_generate(("<<Copy>>"))
+    text.event_generate("<<Copy>>")
 
 
 def paste_():
-    text.event_generate(("<<Paste>>"))
+    text.event_generate("<<Paste>>")
 
 
 def about_():
